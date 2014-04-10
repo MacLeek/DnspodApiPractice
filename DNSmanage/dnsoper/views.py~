@@ -98,6 +98,7 @@ def modDomain(request):
     pass
 
 #域名视图
+#todo:1.超过三千记录后分页 2.删除记录使用jquery post,不然会多次调用urlilb
 def domainview(request,domainid):
     msg = ''
     if request.session.get('is_login') == True:
@@ -148,9 +149,9 @@ def modRecord(request,domainid,recordid):
     if request.session.get('is_login') == True:
         if request.method == "POST":
             result = RecordModify(recordid,sub_domain=request.POST['sub_domain'], record_type=request.POST['record_type'].encode("utf8"), record_line=request.POST['record_line'].encode("utf8"), value=request.POST['value'], ttl=request.POST['ttl'], domain_id=domainid,email=request.session['email'], password=request.session['password'])
-            #添加成功跳转回域名视图
+            #记录修改跳转回域名视图
             if result().get("status").get("code") == "1":
-                msg = '记录添加成功'
+                msg = '记录修改成功'
                 return HttpResponseRedirect("/dnsoper/domain/"+domainid)
             #失败显示错误信息
             else:
@@ -177,6 +178,7 @@ def logout(request):
         pass
     return HttpResponseRedirect("/dnsoper/login")
 
+#按照指定格式到处域名的记录信息
 def exportRecords(request,domainid):
     if request.session.get('is_login') == True:
         Domains = RecordList(email=request.session['email'], password=request.session['password'],domain_id=domainid)
@@ -187,7 +189,7 @@ def exportRecords(request,domainid):
             if record["value"].find(' ') != -1:
                 record["value"] = '"'+record["value"]+'"'
             content+=record["name"].encode("utf8")+"   "+record["type"].encode("utf8")+"   "+record["line"].encode("utf8")+"   "+record["value"].encode("utf8")+"   "+record["mx"].encode("utf8")+"   "+record["ttl"].encode("utf8")+"\n"
-        #如果使用sae服务器部署w
+        #如果使用sae服务器部署
         if 'SERVER_SOFTWARE' in os.environ:
             import sae.storage       
             s = sae.storage.Client()
@@ -204,17 +206,17 @@ def exportRecords(request,domainid):
     else:
         return HttpResponseRedirect("/dnsoper/login")
 
+#
 def importRecords(request,domainid):
     msg=''
     if request.session.get('is_login') == True:
         if request.method == "POST":
+            #读取上传文件的内容,提取记录信息调用api
             try:
                 content = request.FILES['file']
                 data = ''.join(content.readlines())
                 records = data.split("\n")
                 records=records[1:]
-                #items = records[0].split('  ')
-                #a=items[1]
                 for i in range(len(records)-1):
                     items=records[i].split('  ')
                     sub_domain = items[1]
@@ -226,11 +228,12 @@ def importRecords(request,domainid):
                     msg=msg+records[i]+':'+result().get("status").get("message")+"<br>"
                 #return HttpResponseRedirect("/dnsoper/domain/"+domainid)
             except:
-                pass
+                msg="请确保文件格式正确!"
         t=get_template('dnsoper/importrecords.html')
         c=RequestContext(request,locals())
         return HttpResponse(t.render(c))
 
     else:
         return HttpResponseRedirect("/dnsoper/login")
+
 
