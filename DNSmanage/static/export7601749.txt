@@ -1,0 +1,15 @@
+主机|类型|线路|记录值|MX优先级|TTL
+*   A   默认   0.0.0.0   0   10
+@   A   默认   204.232.175.78   0   10
+@   MX   默认   mx.mail.ym.163.com.   10   600
+@   NS   默认   f1g1ns1.dnspod.net.   0   600
+@   NS   默认   f1g1ns2.dnspod.net.   0   600
+@   TXT   默认   "v=spf1 include:spf.mail.qq.com ~all"   0   600
+email   CNAME   默认   email.secureserver.net.   0   600
+ftp   CNAME   默认   happylyang.com.   0   600
+imap   CNAME   默认   imap.secureserver.net.   0   600
+mail   CNAME   默认   ym.163.com.   0   600
+pop   CNAME   默认   pop.secureserver.net.   0   600
+smtp   CNAME   默认   smtp.secureserver.net.   0   600
+www   A   默认   204.232.175.78   0   600
+www   CNAME   默认   happylyang.com.   0   600

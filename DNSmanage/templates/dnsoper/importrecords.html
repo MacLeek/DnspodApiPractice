@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form enctype="multipart/form-data" action="" method="POST"> 
+  <div class="field">
+            <label for="id_message">上传文件:</label>
+            <input type="file" accept="text/plain" name="file" id="id_file" />      
+    {% csrf_token %}      
+    </div>  
+    {% if records %}
+   <h4> {{sub_domain}} </h4>
+    {% endif %}           
+{% if msg %}
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <p>{{msg}}</p>>
+</div>
+{% endif %}
+  <button type="submit" class="btn btn-primary">上传</button>
+</form>
+
+{% endblock %}
+

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form-inline" role="form" action="" method="post" >
+  <div class="form-group">
+   <div class="field">
+    <label class="sr-only" for="domain">主机记录</label>
+    <input type="text" class="form-control" name="sub_domain" value="{{record.sub_domain}}">
+  </div>
+  <div class="field">
+    <label class="sr-only" for="domain">记录类型</label>
+    <td><select name="record_line" id="record_line">
+      <option value="">---------</option>
+      <option id="默认" value="默认">默认</option>
+      <option id="电信" value="电信">电信</option>
+      <option id="联通" value="联通">联通</option>
+      <option id="教育网" value="教育网">教育网</option>
+      <option id="百度" value="百度">百度</option>
+      <option id="搜索引擎" value="搜索引擎">搜索引擎</option>
+    </select></td>
+  </div>
+  <div class="field">
+    <label class="sr-only" for="domain">线路类型</label>
+    <td><select name="record_type" id="record_type">
+      <option value="">---------</option>
+      <option id="A" value="A">A</option>
+      <option id="CNAME" value="CNAME">CNAME</option>
+      <option id="MX" value="MX">MX</option>
+      <option id="TXT" value="TXT">TXT</option>
+      <option id="NS" value="NS">NS</option>
+      <option id="AAAA" value="AAAA">AAAA</option>
+      <option id="SRV" value="SRV">SRV</option>
+      <option id="显性URL" value="显性URL">显性URL</option>
+      <option id="隐形URL" value="隐形URL">隐形URL</option>
+    </select></td>  </div>
+    <div class="field">
+      <label class="sr-only" for="domain">记录值</label>
+      <input type="text" class="form-control" name="value" value="{{record.value}}">
+    </div>
+    <div class="field">
+      <label class="sr-only" for="domain">  MX优先级</label>
+      <input type="text" class="form-control" name="record" value="{{record.mx}}" disabled>
+    </div>
+    <div class="field">
+      <label class="sr-only" for="domain">TTL</label>
+      <input type="text" class="form-control" name="ttl" value="{{record.ttl}}">
+    </div>
+
+
+    {% csrf_token %}                   
+  </div>
+{% if msg %}
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {{msg}}
+</div>
+{% endif %}
+  <div class="field">
+    <button type="submit" class="btn btn-primary">修改</button>
+  </div>
+</form>
+
+{% endblock %}
+{% block js %}
+<script language="javascript">
+
+  var txt = document.getElementById("{{record.record_line}}");
+  txt.setAttribute("selected","selected");
+  var txt2 = document.getElementById("{{record.record_type}}");
+  txt2.setAttribute("selected","selected");
+</script>
+{% endblock %}
+

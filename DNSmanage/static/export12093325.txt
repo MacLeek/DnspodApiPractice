@@ -1,0 +1,3 @@
+主机|类型|线路|记录值|MX优先级|TTL
+@   NS   默认   f1g1ns1.dnspod.net.   0   600
+@   NS   默认   f1g1ns2.dnspod.net.   0   600

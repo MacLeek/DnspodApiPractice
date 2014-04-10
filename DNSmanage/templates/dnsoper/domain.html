@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bs-example">
+  <form class="form-inline" role="form" action="" method="post" >
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>主机记录</th>
+          <th>记录类型</th>
+          <th>线路类型</th>
+          <th>记录值</th>
+          <th>MX优先级</th>
+          <th>TTL</th>
+          <th><input type="checkbox" onClick="toggle(this)"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in records %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{record.name}}</td>
+          <td>{{record.type}}</td>
+          <td>{{record.line}}</td>
+          <td>{{record.value}}</td>
+          <td>{{record.mx}}</td>
+          <td>{{record.ttl}}</td>
+          <td><input type="checkbox" name="check" value="{{record.id}}"> </td>
+          <td><a href="/dnsoper/modrecord/{{domainid}}/{{record.id}}">修改</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      {% csrf_token %}  
+    </table>
+{% if msg %}
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {{msg}}
+</div>
+{% endif %}
+    <button type="submit" class="btn btn-danger">删除</button>
+      <a href="/dnsoper/addrecord/{{domainid}}" class="btn btn-primary" role="button">添加记录</a>
+      <a href="/dnsoper/export/{{domainid}}" class="btn btn-primary" role="button">导出记录</a>
+      <a href="/dnsoper/import/{{domainid}}" class="btn btn-primary" role="button">导入记录</a>
+  </form>
+</div><!-- /example -->
+{% endblock %}
+{% block js %}
+<script>
+  function toggle(source) {
+    checkboxes = document.getElementsByName('check');
+    for(var i=0, n=checkboxes.length;i<n;i++)
+    {
+      checkboxes[i].checked = source.checked;
+    }
+  }
+</script>
+{% endblock %}

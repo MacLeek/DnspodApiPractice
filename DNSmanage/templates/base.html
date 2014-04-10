@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>DnsMangeSystem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This is a test">
+  <meta name="keywords" content="Bootstrap,CSS,CSS框架,CSS framework,javascript,bootcss,bootstrap开发,bootstrap代码,bootstrap入门">
+  <meta name="author" content="Leek">
+  <meta name="robots" content="index,follow">
+  <meta name="application-name" content="">
+
+  <!-- Site CSS -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/site.min.css" rel="stylesheet">
+
+  <!-- Extras CSS -->
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+
+    <script>
+      var _hmt = _hmt || [];
+    </script>
+    <body>
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand hidden-sm" href="/depotapp/index">DNSMangeSystem</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+
+              {% if request.session.is_login %}
+              <li><a href="#">亲爱的{{request.session.username}}，欢迎您</a></li>
+              <li><a href="/dnsoper/usercenter" >个人中心</a></li>
+              <li><a href="/dnsoper/logout" >注销</a></li>
+              {% else %}
+
+              <li><a href="/depotapp/login" >登录</a></li>
+
+              {% endif %}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+<!-- Carousel
+  ================================================== -->
+
+  <div class="bc-social">
+
+  </div>
+  <div class="container projects">
+   <div class="projects-header page-header">
+
+    {% block pageheader %}
+
+    {% endblock %}
+  </div>
+
+  <div class="container projects">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="span3 bs-docs-sidebar">
+          <ul class="nav nav-list bs-docs-sidenav">
+            <li><a href="/dnsoper/adddomain"><i class="icon-chevron-right"></i> 添加新域名</a></li><br>
+            <li><a href="/dnsoper/mydomains"><i class="icon-chevron-right"></i> 我的域名</a></li><br>
+            <li><a href="/dnsoper/usercenter"><i class="icon-chevron-right"></i> 我的资料</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        {% block content %}
+
+        {% endblock %}
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+
+  <!-- FOOTER -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block js %}
+    <!--这里插入具体页面引用的js库，或者js代码-->
+    {% endblock %}
+
+    <script>
+      $(function () {
+              //这里编写base界面的on_ready代码
+              
+              {% block on_ready %}
+              {% endblock %}
+            });
+    </script>
+    <script>
+      $(document).ready(function(){
+      };
+    </script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css?ver=3.0.5" />
+    <script src="/static/js/jquery-1.7.1.min.js"></script>  </body>
+    </html>

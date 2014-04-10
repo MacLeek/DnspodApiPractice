@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form-inline" role="form" action="" method="post" >
+  <div class="form-group">
+   <div class="field">
+    <label class="sr-only" for="domain">主机记录</label>
+    <input type="text" class="form-control" name="sub_domain" placeholder="主机记录">
+  </div>
+  <div class="field">
+    <label class="sr-only" for="domain">记录类型</label>
+    <td><select name="record_line" id="id_type">
+      <option value="默认" selected="selected">---------</option>
+      <option value="默认">默认</option>
+      <option value="电信">电信</option>
+      <option value="联通">联通</option>
+      <option value="教育网">教育网</option>
+      <option value="百度">百度</option>
+      <option value="搜索引擎">搜索引擎</option>
+    </select></td>
+  </div>
+  <div class="field">
+    <label class="sr-only" for="domain">线路类型</label>
+<td><select name="record_type" id="id_type">
+      <option value="A" selected="selected">---------</option>
+      <option value="A">A</option>
+      <option value="CNAME">CNAME</option>
+      <option value="MX">MX</option>
+      <option value="TXT">TXT</option>
+      <option value="NS">NS</option>
+      <option value="AAAA">AAAA</option>
+      <option value="SRV">SRV</option>
+      <option value="显性URL">显性URL</option>
+      <option value="隐形URL">隐形URL</option>
+    </select></td>  </div>
+  <div class="field">
+    <label class="sr-only" for="domain">记录值</label>
+    <input type="text" class="form-control" name="value" placeholder="记录值">
+  </div>
+  <div class="field">
+    <label class="sr-only" for="domain">  MX优先级</label>
+    <input type="text" class="form-control" name="record" placeholder="-" disabled>
+  </div>
+  <div class="field">
+    <label class="sr-only" for="domain">TTL</label>
+    <input type="text" class="form-control" name="ttl" placeholder="TTL">
+  </div>
+
+
+  {% csrf_token %}                   
+</div>
+{% if msg %}
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {{msg}}
+</div>
+{% endif %}
+<div class="field">
+<button type="submit" class="btn btn-primary">添加</button>
+</div>
+</form>
+
+{% endblock %}
+

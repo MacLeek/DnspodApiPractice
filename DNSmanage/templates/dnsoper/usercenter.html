@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <form class="form-horizontal" role="form">
+    {% for key,value in userdetails.items %}
+        <div class="form-group">
+            <label for="inputEmail3" align="middle" class="col-lg-2 control-label"><h4>{{key}}</h4></label>
+            <div class="col-lg-3">
+                <input class="form-control" id="disabledInput" type="text" placeholder="{{value}}" disabled>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</form>
+</div>
+{% endblock %}
