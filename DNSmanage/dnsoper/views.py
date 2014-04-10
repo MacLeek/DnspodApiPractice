@@ -110,7 +110,7 @@ def domainview(request,domainid):
                 #添加成功跳转回域名视图
                 if result().get("status").get("code") == "1":
                     msg = '记录删除成功'
-                    return HttpResponseRedirect("/dnsoper/domain/"+domainid)
+                    #return HttpResponseRedirect("/dnsoper/domain/"+domainid)
                 #失败显示错误信息
                 else:
                     msg = result().get("status").get("message")
