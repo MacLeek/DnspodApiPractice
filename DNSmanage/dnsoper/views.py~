@@ -187,7 +187,7 @@ def exportRecords(request,domainid):
             if record["value"].find(' ') != -1:
                 record["value"] = '"'+record["value"]+'"'
             content+=record["name"].encode("utf8")+"   "+record["type"].encode("utf8")+"   "+record["line"].encode("utf8")+"   "+record["value"].encode("utf8")+"   "+record["mx"].encode("utf8")+"   "+record["ttl"].encode("utf8")+"\n"
-        #如果使用sae服务器部署
+        #如果使用sae服务器部署w
         if 'SERVER_SOFTWARE' in os.environ:
             import sae.storage       
             s = sae.storage.Client()
